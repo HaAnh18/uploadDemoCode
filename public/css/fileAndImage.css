@@ -1,0 +1,170 @@
+.container {
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+}
+
+.container .form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.container .form .title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.container .form .field {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.container .form .field .inputField {
+  height: 50px;
+  width: 300px;
+}
+
+.container .form .field .inputField input {
+  height: 100%;
+  width: 100%;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  /* border-top: 2px solid transparent; */
+  transition: left 0.18s ease;
+}
+
+.container .form .field .inputField input:focus {
+  border: 2px solid #af3854;
+}
+
+.container .form .field .fileInput {
+  position: relative;
+}
+
+.container .form .field .fileInput .file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.container .form .field .fileInput .uploadBtn {
+  background-color: #af3854;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container .form .button {
+  display: flex;
+  justify-content: start;
+  padding: 0;
+  margin: 0;
+}
+
+.container .form .button .submitBtn {
+  border: 1px solid #af3854;
+  color: #af3854;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 10px 20px;
+}
+
+.container .content {
+  padding: 0 20px; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container .content .title {
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.container .content .fileList {
+  display: flex;
+  gap: 20px;
+}
+
+.container .content .fileList .fileDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container .content .fileList .fileDetail .filename {
+  color: #af3854;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #af3854;
+  padding: 10px 20px;
+}
+
+.container .content .fileList .fileDetail .filename {
+  text-decoration: none;
+  color: #af3854;
+}
+
+.container .content .fileList .fileDetail .removeBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.container .content .imageList {
+  display: flex;
+  gap: 20px; 
+  flex-wrap: wrap;
+}
+
+.container .content .imageList .imgCard {
+  width: calc(100%/3 - 15px);
+  max-width: calc(100%/3 - 15px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  row-gap: 30px;
+}
+
+.container .content .imageList .imgCard .img {
+  width: 250px;
+  height: 250px;
+}
+
+.container .content .imageList .imgCard .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container .content .imageList .imgCard .name {
+  font-weight: bold;
+}
+
+.container .content .imageList .imgCard .removeBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}

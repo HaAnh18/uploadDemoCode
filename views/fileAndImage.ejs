@@ -1,0 +1,64 @@
+<title>Homepage</title>
+<!-- Include head file with scriptlet tag -->
+<%- include('./partials/head.ejs') %>
+<link rel="stylesheet" href="/css/fileAndImage.css"/>
+<body>
+  <div class="container">
+    <form class="form" method="post" action="upload" enctype="multipart/form-data">
+      <div class="title">Add New File</div>
+      <div class="field">
+        <div class="inputField">
+          <input name="title" class="titleInput" type="text" placeholder="Enter title" required>
+        </div>
+  
+        <div class="fileInput">
+          <input name="image" type="file" id="file" class="file" required accept="jpeg, jpg, png, pdf" onchange="updateLabel()">
+          <label for="file" class="uploadBtn" id="uploadBtn">
+            Choose A File
+          </label>
+        </div>
+      </div>
+
+      <div class="button">
+        <button type="submit" class="submitBtn">Submit</button>
+      </div>
+
+    </form>
+
+    <div class="content">
+      <div class="title">Files</div>
+      <div class="fileList">
+        <% files.forEach(function(file){ %>
+          <div class="fileDetail">
+              <a href="/uploads/<%=file.filename%>" class="filename"><%=file.title%></a>
+              <a href="/remove/<%=file._id%>" class="removeBtn">Remove</a>
+          </div>
+          <% }); %>
+      </div>
+
+      <div class="title">Images</div>
+      <div class="imageList">
+        <% images.forEach(function(image){ %>
+          <div class="imgCard">
+            <div class="img">
+              <img src="/uploads/<%=image.filename%>">
+            </div>
+            <div class="name"><%= image.title %></div>
+              <a href="/remove/<%=image._id%>" class="removeBtn">Remove</a>
+          </div>
+          <% }); %>
+      </div>
+    </div>
+  
+
+
+
+   
+  </div>
+
+  <script src="/javascripts/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
