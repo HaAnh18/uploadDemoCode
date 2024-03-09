@@ -9,6 +9,11 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  type: {
+    type: String,
+    enum: ["Image", "File"],
+    required: true
+  },
   createdAt: {
     type: Date,
     default: new Date()

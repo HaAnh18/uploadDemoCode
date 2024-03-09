@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 require('dotenv').config()
 const mongoose = require("mongoose")
-const fileAndImageRouter = require('./routes/fileAndImage');
-
+const file = require('./routes/file');
 const app = express();
 
 //CONNECT DATABASE
@@ -20,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 // Route for handling index
-app.use("/", fileAndImageRouter);
+app.use("/", file);
 
 const port = process.env.PORT || 8000;
 

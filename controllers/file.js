@@ -1,4 +1,4 @@
-const FileAndImage = require("../models/fileAndImage")
+const FileAndImage = require("../models/file")
 const path = require('path');
 
 exports.uploadFile = async(req, res) => {
@@ -24,7 +24,7 @@ exports.getHomepage = async(req, res) => {
 
   const images = await FileAndImage.find({type: "Image"})
 
-  res.render('fileAndImage', {files: files, images: images});
+  res.render('file', {files: files, images: images});
 }
 
 exports.removeFile = async(req, res) => {

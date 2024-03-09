@@ -1,31 +1,36 @@
-const multer = require("multer"); // is the middleware for handling "multipart/form-data" which is used for file uploads
+const multer = require("multer");
 const path = require("path");
 
-
 const storage = multer.diskStorage({
-  // Set the destination of upload file
   destination: (req, file, cb) => {
     cb(null, "./public/uploads");
   },
-  // Set the name for upload file
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
-const upload = multer({
-  storage: storage,
-  // 
-  fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png|pdf/;
-    const mimeType = fileTypes.test(file.mimetype);
-    const extname = fileTypes.test(path.extname(file.originalname));
+const handleFileUploadError = (req, res, next) => {
+  // This middleware handles errors during file upload
+  const uploadImg = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+      const fileTypes = /jpeg|JPG|png|pdf/;
+      const mimeType = fileTypes.test(file.mimetype);
+      const extname = fileTypes.test(path.extname(file.originalname));
 
-    if (mimeType && extname) {
-      return cb(null, true);
-    }
-    cb("Check the file format");
-  },
-}).single('image');
+      if (mimeType && extname) {
+        // If the file format is allowed, accept the file
+        return cb(null, true);
+      }
 
-module.exports = upload
+      // If the file format is not allowed, render the signup page with an error message
+      res.render("signup", { message: "Check the file format" });
+    },
+  }).single('image');
+
+  // Call the middleware
+  uploadImg(req, res, next);
+};
+
+module.exports = handleFileUploadError;
