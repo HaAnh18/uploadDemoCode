@@ -1,4 +1,4 @@
-const FileAndImage = require("../models/file")
+const File = require("../models/file")
 const path = require('path');
 
 exports.uploadFile = async(req, res) => {
@@ -15,19 +15,19 @@ exports.uploadFile = async(req, res) => {
     data.type = "Image"
   }
 
-  await FileAndImage.create(data);
+  await File.create(data);
   res.redirect("/")
 }
 
 exports.getHomepage = async(req, res) => {
-  const files = await FileAndImage.find({type: "File"})
+  const files = await File.find({type: "File"})
 
-  const images = await FileAndImage.find({type: "Image"})
+  const images = await File.find({type: "Image"})
 
   res.render('file', {files: files, images: images});
 }
 
 exports.removeFile = async(req, res) => {
-  await FileAndImage.findByIdAndDelete(req.params.id)
+  await File.findByIdAndDelete(req.params.id)
   res.redirect("/");
 }
