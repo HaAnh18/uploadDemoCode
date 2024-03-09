@@ -117,6 +117,7 @@ To change the database location, you'll need to go to `.env` file and change the
 ## 5. Screenshots
 
 - Homepage
+
 ![Homepage](./public/images/homepage.png)
 
 ## License
