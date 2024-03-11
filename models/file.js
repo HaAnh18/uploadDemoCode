@@ -7,12 +7,12 @@ const fileSchema = new mongoose.Schema({
   },
   filename: {
     type: String,
-    required: true
+    required: [true, "File is required"]
   },
   type: {
     type: String,
     enum: ["Image", "File"],
-    required: true
+    required: [true, "Type is required"]
   },
   createdAt: {
     type: Date,
