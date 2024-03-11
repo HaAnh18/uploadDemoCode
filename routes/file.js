@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const handleFileUploadError = require("../middlewares/upload")
+const uploadImg = require("../middlewares/upload")
 const { uploadFile, getHomepage, removeFile } = require("../controllers/file")
 
 router.get('/', getHomepage);
 
-router.post('/upload', handleFileUploadError, uploadFile)
+router.post('/upload', uploadImg, uploadFile)
 
 router.get('/remove/:id', removeFile)
 

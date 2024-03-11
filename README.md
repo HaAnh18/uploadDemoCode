@@ -114,6 +114,64 @@ To change the database location, you'll need to go to `.env` file and change the
 
 ![Database](./public/images/database.jpg)
 
+## 5. Descriptions
+
+### Handle Uploaded File
+
+![Handle uploaded file](./public/images/upload-1.png)
+
+- Multer is configured with a disk storage engine `multer.diskStorage` to define the destination and filename for storing uploaded files
+
+- The `destination` function will determine where file will be stored and in this function, all of the uploaded files will be saved in `/public/uploads`
+
+- The `filename` function will generate a unique filename based in the current timestamp and the original file extension
+
+![Handle uploaded file](./public/images/upload-2.png)
+
+- The `fileFilter` function will be used to validate the uploaded file is acceptable based on its mimetype and extension
+
+- The variable `fileTypes` defines a regular expression that matches allowed file formats: JPEG, JPG, PNG, and PDF.
+
+- If both the mimetype and extension are allowed, `cb(null, true)` is called to accept the file.
+
+- If the file format is not allowed, `cb("Check the file format")` is called to reject the file with an error message.
+
+
+### File Model
+
+![Model](./public/images/model.png)
+
+- The `fileSchema` is created using `mongoose.Schema`. It defines the structure of the documents that will be stored in the MongoDB collection associated with the `File` model.
+
+### Controller Functions
+
+#### Upload File 
+
+![Upload File](./public/images/uploadFile.png)
+
+- The `uploadFile` function handles the file upload 
+
+- It extracts data from the request body and file
+
+- It would check the file type based on its extension. If the extension is `pdf` the type is set to `File`; otherwise it's set to `Image`
+
+- The data is then used to create a new document in the `File` collection using `File.create`.
+
+- After successful creation, the user is redirected to the homepage
+
+#### Get Homepage 
+
+![Get Homepage](./public/images/getHomepage.png)
+
+- The `getHomepage` function would retrieve files from the `File` collection based on their type (`File` and `Image`) using `File.find`. Then it would render the `file` view, passing the files and images to be displayed
+
+#### Remove File
+
+![Remove File](./public/images/removeFile.png)
+
+- This function deletes a file from the `File` collection based on its ID using `File.findByIdAndDelete`. After deletion, the user is redirected to the homepage (`/`).
+
+
 ## 5. Screenshots
 
 - Homepage
