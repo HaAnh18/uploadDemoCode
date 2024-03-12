@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Define the file schema
 const fileSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -20,4 +21,5 @@ const fileSchema = new mongoose.Schema({
   }
 })
 
+// Create and export the File model based on the schema
 module.exports = mongoose.model("File", fileSchema);

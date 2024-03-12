@@ -11,6 +11,7 @@ mongoose
 .then(() => console.log("DB connected"))
 .catch((err) => console.log(err));
 
+// Set up the template engine (EJS) and views directory
 const templatePath = path.join(__dirname, './views');
 app.use(express.json());
 app.set("view engine", "ejs");
