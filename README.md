@@ -136,7 +136,6 @@ To change the database location, you'll need to go to `.env` file and change the
 
 - If the file format is not allowed, `cb("Check the file format")` is called to reject the file with an error message.
 
-
 ### File Model
 
 ![Model](./public/images/model.png)
@@ -171,13 +170,30 @@ To change the database location, you'll need to go to `.env` file and change the
 
 - This function deletes a file from the `File` collection based on its ID using `File.findByIdAndDelete`. After deletion, the user is redirected to the homepage (`/`).
 
+## 6. The Model-View-Controller (MVC) Architecture
 
-## 5. Screenshots
+![MVC](./public/images/mvc.JPG)
+
+### Model (M)
+
+- The model interacts with the MongoDB database through Mongoose, providing an abstraction for CRUD (Create, Read, Update, Delete) operations on file-related data.
+
+### View (V)
+
+- The EJS templates serve as the views in the application.
+
+- They contain HTML structures with embedded JavaScript code (using EJS syntax) to dynamically generate content based on the data provided by the controller.
+
+### Controller (C)
+
+- The controller in the application handles the logic and acts as an intermediary between the model (data) and the views (presentation). 
+
+## 7. Screenshots
 
 ### Homepage
 
 ![Homepage](./public/images/homepage.png)
 
-## License
+## 8. License
 
 This software is licensed under the MIT License ©
