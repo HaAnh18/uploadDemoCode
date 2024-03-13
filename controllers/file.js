@@ -61,18 +61,25 @@ exports.removeFile = async (req, res) => {
 };
 
 exports.getPDF = async (req, res) => {
+  // Find the PDF file in the database by its ID
   const PDFFile = await File.findById(req.params.id);
 
+  // If the PDF file is not found, return a 404 error response
   if (!PDFFile) {
     return res.status(404).send("PDF not found");
   }
 
-  const base64Data = Buffer.from(PDFFile.file.data, "binary").toString("base64");
+  // Convert the binary data of the PDF file to a base64-encoded string
+  const base64Data = Buffer.from(PDFFile.file.data, "binary").toString(
+    "base64"
+  );
 
+  // Set the response headers for serving the PDF file
   res.set({
     "Content-Type": "application/pdf",
     "Content-Disposition": 'inline; filename="file.pdf"',
   });
 
+  // Send the base64-encoded PDF data as the response
   res.send(Buffer.from(base64Data, "base64"));
 };

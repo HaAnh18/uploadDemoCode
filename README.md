@@ -150,9 +150,11 @@ To change the database location, you'll need to go to `.env` file and change the
 
 - The `uploadFile` function handles the file upload 
 
-- It extracts data from the request body and file
+- Constructs file path and reads its binary contents.
 
-- It would check the file type based on its extension. If the extension is `pdf` the type is set to `File`; otherwise it's set to `Image`
+- It extracts data from the request body and file, including content type.
+
+- It would check the file type based on its extension. If the extension is `pdf` the type is set to `File`; otherwise it's set to `Image`.
 
 - The data is then used to create a new document in the `File` collection using `File.create`.
 
@@ -169,6 +171,20 @@ To change the database location, you'll need to go to `.env` file and change the
 ![Remove File](./public/images/removeFile.png)
 
 - This function deletes a file from the `File` collection based on its ID using `File.findByIdAndDelete`. After deletion, the user is redirected to the homepage (`/`).
+
+#### Get PDF
+
+![Get PDF](./public/images/getPDF.png)
+
+- Retrieves the PDF file from the MongoDB database based on its ID.
+
+- Checks if the PDF file exists; if not, returns a 404 error response with the message "PDF not found".
+
+- Converts the binary data of the PDF file to a base64-encoded string using `Buffer.from`.
+
+- Sets the response headers for serving the PDF file with appropriate content type and inline disposition.
+
+- Sends the base64-encoded PDF data as the response using `res.send`.
 
 ## 6. The Model-View-Controller (MVC) Architecture
 
