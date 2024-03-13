@@ -29,8 +29,8 @@
       <div class="fileList">
         <% files.forEach(function(file){ %>
           <div class="fileDetail">
-              <a href="/uploads/<%=file.filename%>" class="filename"><%=file.title%></a>
-              <a href="/remove/<%=file._id%>" class="removeBtn">Remove</a>
+            <a href="/pdf/<%= file._id %>" class="filename"><%=file.title%></a>
+            <a href="/remove/<%=file._id%>" class="removeBtn">Remove</a>
           </div>
           <% }); %>
       </div>
@@ -40,7 +40,7 @@
         <% images.forEach(function(image){ %>
           <div class="imgCard">
             <div class="img">
-              <img src="/uploads/<%=image.filename%>">
+              <img src="data:<%= image.file.contentType %>;base64,<%= image.file.data.toString('base64') %>">
             </div>
             <div class="name"><%= image.title %></div>
               <a href="/remove/<%=image._id%>" class="removeBtn">Remove</a>

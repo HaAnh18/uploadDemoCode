@@ -1,25 +1,38 @@
 const File = require("../models/file");
 const path = require("path");
+const fs = require("fs");
 
 // Controller function for handling file uploads
 exports.uploadFile = async (req, res) => {
+  const filePath = path.join(
+    __dirname,
+    "../public/uploads/",
+    req.file.filename
+  );
+
+  // Read file contents as binary data
+  const fileData = fs.readFileSync(filePath);
+
   // Extracting data from the request body and file
   let data = {
     title: req?.body?.title,
-    filename: req?.file?.filename,
+    file: {
+      data: fileData,
+      contentType: req.file.mimetype,
+    },
   };
 
   // Determine the file type based on its extension
   const fileExtension = path.extname(req?.file?.path).toLowerCase();
 
-  // Set the 'type' property in the data object based on the file extension
+  // // Set the 'type' property in the data object based on the file extension
   if (fileExtension == ".pdf") {
     data.type = "File";
   } else {
     data.type = "Image";
   }
 
-  // Create a record in the 'File' collection in MongoDB with the provided data
+  // // Create a record in the 'File' collection in MongoDB with the provided data
   await File.create(data);
 
   // Redirect the user to the home page
@@ -45,4 +58,21 @@ exports.removeFile = async (req, res) => {
 
   // Redirect the user to the home page after successful deletion
   res.redirect("/");
+};
+
+exports.getPDF = async (req, res) => {
+  const PDFFile = await File.findById(req.params.id);
+
+  if (!PDFFile) {
+    return res.status(404).send("PDF not found");
+  }
+
+  const base64Data = Buffer.from(PDFFile.file.data, "binary").toString("base64");
+
+  res.set({
+    "Content-Type": "application/pdf",
+    "Content-Disposition": 'inline; filename="file.pdf"',
+  });
+
+  res.send(Buffer.from(base64Data, "base64"));
 };
