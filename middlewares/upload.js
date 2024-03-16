@@ -2,16 +2,7 @@ const multer = require("multer");
 const path = require("path");
 
 // Configure storage for uploaded files
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Set the destination folder for uploaded files
-    cb(null, "./public/uploads");
-  },
-  filename: (req, file, cb) => {
-    // Set the filename to include the current timestamp and the original file extension
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+const storage = multer.memoryStorage();
 
 // Configure Multer middleware with storage and file filter
 const uploadImg = multer({

@@ -118,15 +118,9 @@ To change the database location, you'll need to go to `.env` file and change the
 
 ### Handle Uploaded File
 
-![Handle uploaded file](./public/images/upload-1.png)
+![Handle uploaded file](./public/images/upload.png)
 
-- Multer is configured with a disk storage engine `multer.diskStorage` to define the destination and filename for storing uploaded files
-
-- The `destination` function will determine where file will be stored and in this function, all of the uploaded files will be saved in `/public/uploads`
-
-- The `filename` function will generate a unique filename based in the current timestamp and the original file extension
-
-![Handle uploaded file](./public/images/upload-2.png)
+- Set up storage using `multer.memoryStorage()`, which stores the file data in memory rather than on disk. This is useful for scenarios where you want to process files without saving them to disk permanently.
 
 - The `fileFilter` function will be used to validate the uploaded file is acceptable based on its mimetype and extension
 
@@ -149,8 +143,6 @@ To change the database location, you'll need to go to `.env` file and change the
 ![Upload File](./public/images/uploadFile.png)
 
 - The `uploadFile` function handles the file upload 
-
-- Constructs file path and reads its binary contents.
 
 - It extracts data from the request body and file, including content type.
 

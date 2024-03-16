@@ -1,29 +1,21 @@
 const File = require("../models/file");
 const path = require("path");
-const fs = require("fs");
 
 // Controller function for handling file uploads
 exports.uploadFile = async (req, res) => {
-  const filePath = path.join(
-    __dirname,
-    "../public/uploads/",
-    req.file.filename
-  );
-
-  // Read file contents as binary data
-  const fileData = fs.readFileSync(filePath);
+  const fileBuffer = req.file.buffer;
 
   // Extracting data from the request body and file
   let data = {
     title: req?.body?.title,
     file: {
-      data: fileData,
+      data: fileBuffer,
       contentType: req.file.mimetype,
     },
   };
 
   // Determine the file type based on its extension
-  const fileExtension = path.extname(req?.file?.path).toLowerCase();
+  const fileExtension = path.extname(req?.file?.originalname).toLowerCase();
 
   // // Set the 'type' property in the data object based on the file extension
   if (fileExtension == ".pdf") {
