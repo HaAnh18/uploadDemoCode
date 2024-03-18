@@ -6,9 +6,8 @@ const fileSchema = new mongoose.Schema({
     type: String,
     required: [true, "Title is required"]
   },
-  file: {
-    data: Buffer,
-    contentType: String
+  filename: {
+    type: String
   },
   type: {
     type: String,

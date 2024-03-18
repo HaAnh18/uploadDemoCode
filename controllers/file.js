@@ -3,19 +3,14 @@ const path = require("path");
 
 // Controller function for handling file uploads
 exports.uploadFile = async (req, res) => {
-  const fileBuffer = req.file.buffer;
-
   // Extracting data from the request body and file
   let data = {
     title: req?.body?.title,
-    file: {
-      data: fileBuffer,
-      contentType: req.file.mimetype,
-    },
+    filename: req?.file?.filename,
   };
 
   // Determine the file type based on its extension
-  const fileExtension = path.extname(req?.file?.originalname).toLowerCase();
+  const fileExtension = path.extname(req?.file?.path).toLowerCase();
 
   // // Set the 'type' property in the data object based on the file extension
   if (fileExtension == ".pdf") {
@@ -50,28 +45,4 @@ exports.removeFile = async (req, res) => {
 
   // Redirect the user to the home page after successful deletion
   res.redirect("/");
-};
-
-exports.getPDF = async (req, res) => {
-  // Find the PDF file in the database by its ID
-  const PDFFile = await File.findById(req.params.id);
-
-  // If the PDF file is not found, return a 404 error response
-  if (!PDFFile) {
-    return res.status(404).send("PDF not found");
-  }
-
-  // Convert the binary data of the PDF file to a base64-encoded string
-  const base64Data = Buffer.from(PDFFile.file.data, "binary").toString(
-    "base64"
-  );
-
-  // Set the response headers for serving the PDF file
-  res.set({
-    "Content-Type": "application/pdf",
-    "Content-Disposition": 'inline; filename="file.pdf"',
-  });
-
-  // Send the base64-encoded PDF data as the response
-  res.send(Buffer.from(base64Data, "base64"));
 };

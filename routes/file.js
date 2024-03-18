@@ -9,6 +9,4 @@ router.post('/upload', uploadImg, uploadFile)
 
 router.get('/remove/:id', removeFile)
 
-router.get('/pdf/:id', getPDF)
-
 module.exports = router;
